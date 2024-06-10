@@ -20,7 +20,7 @@ def start(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     write_comment_button = types.KeyboardButton("Оставить отзыв")
     see_comment_button = types.KeyboardButton("Смотреть комментарии")
-    back_button = types.InlineKeyboardButton('Назад ↩', url="https://web.telegram.org/a/#6376544643")
+    back_button = types.KeyboardButton('Назад ↩')
     # check user_id for view comments access:
     if message.from_user.id in get_feedback_access_id():
         markup.add(write_comment_button, see_comment_button, back_button)
@@ -60,6 +60,11 @@ def view_comments(message):
                 f"*Комментарий:* {comment[1]}",
                 parse_mode='Markdown'
             )
+
+
+@bot.message_handler(func=lambda message: message.text == 'Назад ↩')
+def back(message):
+    bot.send_message(message.chat.id, "https://t.me/StranaDevelopmentBot")
 
 
 bot.polling(none_stop=True)
