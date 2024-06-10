@@ -23,9 +23,9 @@ def start(message):
     back_button = types.InlineKeyboardButton('Назад ↩', url="https://web.telegram.org/a/#6376544643")
     # check user_id for view comments access:
     if message.from_user.id in get_feedback_access_id():
-        markup.add(write_comment_button, see_comment_button)
+        markup.add(write_comment_button, see_comment_button, back_button)
     else:
-        markup.add(write_comment_button)
+        markup.add(write_comment_button, back_button)
 
     bot.send_message(message.chat.id, "Здесь вы можете предложить свои идеи по улучшению проекта, \n"
                                       "а также поставить оценку нашему проекту", reply_markup=markup)
